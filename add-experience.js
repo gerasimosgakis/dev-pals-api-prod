@@ -9,7 +9,7 @@ export async function main(event, context) {
   const data = bodyWithId;
 
   const params = {
-    TableName: "profiles",
+    TableName: process.env.tableProfilesName,
     // 'Item' contains the attributes of the item to be created
     // - 'userId': user identities are federated through the
     //             Cognito Identity Pool, we will use the identity id

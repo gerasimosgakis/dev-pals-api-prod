@@ -9,7 +9,7 @@ export async function main(event, context) {
   const data = bodyWithId;
 
   const params = {
-    TableName: "profiles",
+    TableName: process.env.tableProfilesName,
     Key: {
       userId: event.requestContext.identity.cognitoIdentityId
     },
