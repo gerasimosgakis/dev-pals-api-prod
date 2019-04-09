@@ -2,27 +2,35 @@ Resources:
   ProfilesTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${self:custom.tableName}
+      TableName: ${self:custom.tableProfilesName}
       AttributeDefinitions:
         - AttributeName: userId
+          AttributeType: S
+        - AttributeName: handle
           AttributeType: S
       KeySchema:
         - AttributeName: userId
           KeyType: HASH
-      GlobalSecondaryIndexes:
-        - IndexName: handle-index
-          KeySchema:
-            - AttributeName: handle-index
-              KeyType: HASH
       # Set the capacity based on the stage
       ProvisionedThroughput:
         ReadCapacityUnits: ${self:custom.tableThroughput}
         WriteCapacityUnits: ${self:custom.tableThroughput}
+      GlobalSecondaryIndexes:
+        - IndexName: handle-index
+          KeySchema:
+            - AttributeName: handle
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+          # Set the capacity based on the stage
+          ProvisionedThroughput:
+            ReadCapacityUnits: ${self:custom.tableThroughput}
+            WriteCapacityUnits: ${self:custom.tableThroughput}
 
   PostsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${self:custom.tableName}
+      TableName: ${self:custom.tablePostsName}
       AttributeDefinitions:
         - AttributeName: postId
           AttributeType: S

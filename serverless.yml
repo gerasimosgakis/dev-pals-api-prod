@@ -12,7 +12,7 @@ custom:
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
   tableProfilesName: ${self:custom.stage}-profiles
-  tablePostsName: ${self:custom.stage}-profiles
+  tablePostsName: ${self:custom.stage}-posts
   # Set our DynamoDB throughput for prod and all other non-prod stages.
   tableThroughputs:
     prod: 5
@@ -158,14 +158,14 @@ functions:
           cors: true
           authorizer: aws_iam
 
-  # Create our resources with separate CloudFormation templates
-  resources:
-    # API Gateway Errors
-    - ${file(resources/api-gateway-errors.yml)}
-    # DynamoDB
-    - ${file(resources/dynamodb-table.yml)}
-    # S3
-    - ${file(resources/s3-bucket.yml)}
-    # Cognito
-    - ${file(resources/cognito-user-pool.yml)}
-    - ${file(resources/cognito-identity-pool.yml)}
+# Create our resources with separate CloudFormation templates
+resources:
+  # API Gateway Errors
+  - ${file(resources/api-gateway-errors.yml)}
+  # DynamoDB
+  - ${file(resources/dynamodb-table.yml)}
+  # S3
+  - ${file(resources/s3-bucket.yml)}
+  # Cognito
+  - ${file(resources/cognito-user-pool.yml)}
+  - ${file(resources/cognito-identity-pool.yml)}
