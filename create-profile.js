@@ -50,6 +50,7 @@ export async function main(event, context) {
   };
 
   try {
+    console.log("running", params);
     await dynamoDbLib.call("put", params);
     return success(params.Item);
   } catch (e) {
